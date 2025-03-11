@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NFEC Initiative</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <style>
+    /* General Styles */
+    body {
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #0A2342;
+      background-color: #FFFFFF;
+      scroll-behavior: smooth; /* Smooth scrolling */
+    }
+
+    h1, h2, h3 {
+      font-family: 'Poppins', sans-serif;
+      color: #0A2342;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header Section */
+    header {
+      background-color: #0A2342;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header .logo {
+      width: 60px; /* Smaller logo size */
+      height: auto;
+    }
+
+    header nav {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+
+    header nav a {
+      color: #FFFFFF;
+      font-size: 14px; /* Smaller font size for mobile */
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    header nav a:hover {
+      color: #FF6B35;
+    }
+
+    /* Hamburger Menu */
+    .hamburger {
+      display: none; /* Hidden by default */
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .hamburger .line {
+      width: 25px;
+      height: 3px;
+      background-color: #FFFFFF;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    /* Mobile Navigation */
+    @media (max-width: 768px) {
+      header nav {
+        display: none; /* Hide the navigation links */
+        flex-direction: column;
+        position: absolute;
+        top: 60px; /* Adjust based on header height */
+        right: 20px;
+        background-color: #0A2342;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      header nav.active {
+        display: flex; /* Show the navigation links when active */
+      }
+
+      .hamburger {
+        display: flex; /* Show the hamburger menu */
+      }
+
+      .hamburger.active .line:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .hamburger.active .line:nth-child(2) {
+        opacity: 0;
+      }
+
+      .hamburger.active .line:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+      }
+    }
+
+    /* Call-to-Action Banner */
+    .cta-banner {
+      background: linear-gradient(90deg, #FF6B35, #D72638);
+      padding: 60px 20px;
+      text-align: center;
+      color: #FFFFFF;
+    }
+
+    .cta-banner h1 {
+      font-size: 36px; /* Smaller font size for mobile */
+      margin: 0;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .cta-banner button {
+      background-color: #FF6B35;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      color: #FFFFFF;
+      cursor: pointer;
+      margin-top: 20px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+
+    .cta-banner button:hover {
+      background-color: #D72638;
+    }
+
+    /* Background Section */
+    .background-section {
+      background-image: url('https://via.placeholder.com/1200x600'); /* Replace with actual image */
+      background-size: cover;
+      background-position: center;
+      padding: 80px 20px;
+      text-align: center;
+      color: #FFFFFF;
+      position: relative;
+      animation: slideIn 1.5s ease-in-out;
+    }
+
+    .background-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(10, 35, 66, 0.7);
+    }
+
+    .background-section h2 {
+      font-size: 36px; /* Smaller font size for mobile */
+      position: relative;
+      z-index: 1;
+    }
+
+    .background-section p {
+      font-size: 16px;
+      max-width: 800px;
+      margin: 20px auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Mission & Vision Section */
+    .mission-vision {
+      display: flex;
+      justify-content: space-around;
+      padding: 60px 20px;
+      background-color: #F5F5F5;
+      flex-wrap: wrap; /* Allow wrapping for mobile */
+    }
+
+    .mission-vision .card {
+      text-align: center;
+      max-width: 400px;
+      animation: fadeInUp 1.5s ease-in-out;
+      margin: 20px 0; /* Add margin for spacing on mobile */
+    }
+
+    .mission-vision .card h3 {
+      font-size: 28px; /* Smaller font size for mobile */
+      margin: 20px 0;
+    }
+
+    .mission-vision .card p {
+      font-size: 16px;
+      color: #666;
+    }
+
+    /* Key Benefits Section */
+    .key-benefits {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjust for mobile */
+      gap: 20px;
+      padding: 60px 20px;
+    }
+
+    .key-benefits .card {
+      background-color: #FFFFFF;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: fadeInUp 1.5s ease-in-out;
+    }
+
+    .key-benefits .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .key-benefits .card h3 {
+      font-size: 20px; /* Smaller font size for mobile */
+      margin: 10px 0;
+    }
+
+    .key-benefits .card p {
+      font-size: 14px; /* Smaller font size for mobile */
+      color: #666;
+    }
+
+    /* Enforcement & Implementation Section */
+    .enforcement {
+      padding: 60px 20px;
+      background-color: #F5F5F5;
+    }
+
+    .enforcement h2 {
+      text-align: center;
+      font-size: 36px; /* Smaller font size for mobile */
+      margin-bottom: 40px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .enforcement .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjust for mobile */
+      gap: 20px;
+    }
+
+    .enforcement .card {
+      background-color: #FFFFFF;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      animation: fadeInUp 1.5s ease-in-out;
+    }
+
+    .enforcement .card h3 {
+      font-size: 20px; /* Smaller font size for mobile */
+      margin: 10px 0;
+    }
+
+    .enforcement .card p {
+      font-size: 14px; /* Smaller font size for mobile */
+      color: #666;
+    }
+
+    /* Project Stages & Achievements Section */
+    .project-stages {
+      padding: 60px 20px;
+      background-color: #FFFFFF;
+    }
+
+    .project-stages h2 {
+      text-align: center;
+      font-size: 36px; /* Smaller font size for mobile */
+      margin-bottom: 40px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .project-stages .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .project-stages .phase {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .project-stages .phase .icon {
+      font-size: 20px; /* Smaller icon size for mobile */
+      color: #FF6B35;
+    }
+
+    .project-stages .phase .content {
+      flex: 1;
+    }
+
+    .project-stages .phase h3 {
+      font-size: 20px; /* Smaller font size for mobile */
+      margin: 0;
+    }
+
+    .project-stages .phase p {
+      font-size: 14px; /* Smaller font size for mobile */
+      color: #666;
+    }
+
+    /* Legal Framework Section */
+    .legal-framework {
+      padding: 60px 20px;
+      background-color: #F5F5F5;
+    }
+
+    .legal-framework h2 {
+      text-align: center;
+      font-size: 36px; /* Smaller font size for mobile */
+      margin-bottom: 40px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .legal-framework .laws {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjust for mobile */
+      gap: 20px;
+    }
+
+    .legal-framework .law {
+      background-color: #FFFFFF;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      animation: fadeInUp 1.5s ease-in-out;
+    }
+
+    .legal-framework .law h3 {
+      font-size: 20px; /* Smaller font size for mobile */
+      margin: 10px 0;
+    }
+
+    .legal-framework .law p {
+      font-size: 14px; /* Smaller font size for mobile */
+      color: #666;
+    }
+
+    /* Footer Section */
+    footer {
+      background-color: #0A2342;
+      padding: 40px 20px;
+      text-align: center;
+      color: #FFFFFF;
+    }
+
+    footer .partners {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px 0;
+      flex-wrap: wrap; /* Allow wrapping for mobile */
+    }
+
+    footer .partners img {
+      height: 30px; /* Smaller partner logos for mobile */
+    }
+
+    footer p {
+      margin: 10px 0;
+      font-size: 14px; /* Smaller font size for mobile */
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideIn {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Section -->
+  <header>
+    <img src="nfes-logo.png" class="logo" alt="NFEC Logo"/>
+    <div class="hamburger" onclick="toggleMenu()">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+    <nav id="navMenu">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#mission">Mission & Vision</a>
+      <a href="#enforcement">Enforcement</a>
+      <a href="#achievements">Achievements</a>
+      <a href="#legal">Legal Framework</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Call-to-Action Banner -->
+  <section id="home" class="cta-banner">
+    <h1>Verify Your Extinguisher Now ➔</h1>
+    <button>Report Suspicious Activity: 24/7 Hotline: [Number]</button>
+  </section>
+
+  <!-- Background Section -->
+  <section id="about" class="background-section">
+    <h2>A Transformative National Initiative</h2>
+    <p>
+      In response to escalating security threats, including the misuse of fire extinguishers as IEDs, illicit trafficking, and substandard manufacturing practices, the Nigerian government launched NFEC under the National Fire Data Repository Center (NFDRC).
+    </p>
+  </section>
+
+  <!-- Mission & Vision Section -->
+  <section id="mission" class="mission-vision">
+    <div class="card">
+      <h3>Mission</h3>
+      <p>To eradicate substandard fire extinguisher practices, enhance national security, and ensure compliance with the highest safety standards through regulation, innovation, and public awareness.</p>
+    </div>
+    <div class="card">
+      <h3>Vision</h3>
+      <p>To position Nigeria as a global leader in fire safety by domesticating manufacturing, fostering collaboration, and deploying cutting-edge technology.</p>
+    </div>
+  </section>
+
+  <!-- Key Benefits Section -->
+  <section id="benefits" class="key-benefits">
+    <div class="card">
+      <h3>National Security</h3>
+      <p>Prevent terrorist exploitation of extinguishers.</p>
+    </div>
+    <div class="card">
+      <h3>Public Safety</h3>
+      <p>Reliable emergency response with certified equipment.</p>
+    </div>
+    <div class="card">
+      <h3>Economic Growth</h3>
+      <p>Boost local jobs via Importation Quota Program (IQP).</p>
+    </div>
+    <div class="card">
+      <h3>Transparency</h3>
+      <p>QR codes and validation portals for citizen verification.</p>
+    </div>
+    <div class="card">
+      <h3>Accountability</h3>
+      <p>Eliminate illegal vendors through Vendor Aggregator Platform (VAP).</p>
+    </div>
+  </section>
+
+  <!-- Enforcement & Implementation Section -->
+  <section id="enforcement" class="enforcement">
+    <h2>Enforcement & Implementation</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Federal Coordination</h3>
+        <p>Ministry of Interior, Federal Fire Service (FFS), SON & Customs.</p>
+      </div>
+      <div class="card">
+        <h3>State-Level Action</h3>
+        <p>SEMA, State Fire Services, NSCDC & Police.</p>
+      </div>
+      <div class="card">
+        <h3>Technology Partner</h3>
+        <p>2TOC Solutions Ltd.</p>
+      </div>
+      <div class="card">
+        <h3>Cross-Agency Collaboration</h3>
+        <p>FFS/FRSC, SEMA-led teams.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Stages & Achievements Section -->
+  <section id="achievements" class="project-stages">
+    <h2>Project Stages & Achievements</h2>
+    <div class="timeline">
+      <div class="phase">
+        <i class="fas fa-users icon"></i>
+        <div class="content">
+          <h3>Stakeholder Engagement</h3>
+          <p>Workshops for fuel stations, markets, and public campaigns.</p>
+        </div>
+      </div>
+      <div class="phase">
+        <i class="fas fa-tools icon"></i>
+        <div class="content">
+          <h3>Workforce Development</h3>
+          <p>IoT monitoring training for enforcement teams.</p>
+        </div>
+      </div>
+      <div class="phase">
+        <i class="fas fa-handshake icon"></i>
+        <div class="content">
+          <h3>Joint Operations</h3>
+          <p>Nationwide raids and SON certification drives.</p>
+        </div>
+      </div>
+      <div class="phase">
+        <i class="fas fa-expand icon"></i>
+        <div class="content">
+          <h3>Scale-Up</h3>
+          <p>Full deployment of IQP/VAP in Abuja Zone.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Legal Framework Section -->
+  <section id="legal" class="legal-framework">
+    <h2>Legal Framework</h2>
+    <div class="laws">
+      <div class="law">
+        <h3>Fire Service Act (2004)</h3>
+        <p>National Fire Safety Code (2009).</p>
+      </div>
+      <div class="law">
+        <h3>SON Act (2015)</h3>
+        <p>NIS 155:2010 standards.</p>
+      </div>
+      <div class="law">
+        <h3>Road Traffic Regulations (2012)</h3>
+        <p>Vehicle compliance.</p>
+      </div>
+      <div class="law">
+        <h3>Disaster Risk Reduction Guidelines</h3>
+        <p>NEMA/SEMA guidelines.</p>
+      </div>
+      <div class="law">
+        <h3>Criminal Code Penalties</h3>
+        <p>Penalties for negligence.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <footer id="contact">
+    <div class="partners">
+      <img src="2toc.png" alt="Partner Logo">
+      <img src="frsc.png" alt="Partner Logo">
+      <img src="son.png" alt="Partner Logo">
+      <img src="moi.png" alt="Partner Logo">
+    </div>
+    <p>Contact: [Email] | Address: [Location]</p>
+    <p>© NFEC Initiative 2023</p>
+  </footer>
+
+  <!-- JavaScript for Hamburger Menu -->
+  <script>
+    function toggleMenu() {
+      const navMenu = document.getElementById("navMenu");
+      const hamburger = document.querySelector(".hamburger");
+      navMenu.classList.toggle("active");
+      hamburger.classList.toggle("active");
+    }
+  </script>
+
+</body>
+</html>
